@@ -1,0 +1,129 @@
+.logo-icon{
+    width: 25%;
+    height: 20%;
+    padding-bottom: 2%;
+}
+.overflowbox{
+    margin-left: 25%;
+    margin-right: 25%;
+}
+.toppadding{
+    padding-top: 2%;
+}
+.mainDiv{
+    padding: var(--lwc-spacingXSmall, 0.5rem);
+    font-size: larger;
+}
+
+.spacing{
+    padding: 2%;
+}
+.logo_icon_mobile{
+    width: 50%;
+    height: 20%;
+    padding-bottom: 2%;
+}
+.inputitemsdiv{
+    
+    align-items: left;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-weight: 500;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+.question{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    
+}
+.buttonsClass{
+    padding-top: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
+    
+}
+.leftButton{
+    padding-left: 50%;
+    
+}
+.rightButton{
+    padding-right: 50%;
+    
+}
+.leftButton, .rightButton{
+    text-align: center;
+}
+
+.bigFont{
+    font-size:large;
+    font-weight: bold;
+}
+.inputsize{
+    font-size: large;
+    padding: 2%;
+}
+.inputbox{
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 2%;
+    
+}
+
+.SuccessToast{
+    color: green;
+    font-size: medium;
+}
+
+
+
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid rgb(25, 0, 255);
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #2600ff transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+    /*border-color: #001aff transparent transparent transparent;*/
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+    /*border-color: #fbff00 transparent transparent transparent;*/
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+   /* border-color: #ae00ff transparent transparent transparent;*/
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
+
+.templateTab{
+padding: 2%;
+
+}
+.outsidediv{
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.padding{
+    padding: 1%;
+}
