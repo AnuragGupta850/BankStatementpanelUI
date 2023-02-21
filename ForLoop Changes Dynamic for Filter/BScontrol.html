@@ -1,0 +1,196 @@
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnore -->
+<template>
+    <lightning-card>
+
+        <template if:true={showSpinner}>         
+            <div class="exampleHolder">
+                <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+            </div>
+        </template>
+        
+       
+        <div class="mainDiv">
+           
+        <div class="slds-text-align_center spacing">
+           
+            <H1><b>Use this panel to reject Bank-statements of selected employment status in Portal Application form.</b></H1>
+            <label>Select origin</label>
+            <select class="slds-select" id="banks" onchange={changeOrigin}>                
+                <template for:each={OriginList} for:item="mapKey">
+                    <option label={mapKey.key} value={mapKey.key} key={mapKey.value}>{mapKey.key}</option>
+                </template>
+            </select>
+        </div>
+
+        <template if:true={displayTabTemplate.options}>
+                <div class="slds-grid templateTab">
+                    <div class="slds-col slds-box slds-align_absolute-center paddingleft" onclick={decideTab} data-id="bankstatement" data-all-id="templateids">
+                        Bank Statement Control
+                    </div>
+                    <div class="padding"></div>
+                    <div class="slds-col slds-box slds-align_absolute-center paddingright" onclick={decideTab} data-id="leadfilter"  data-all-id="templateids">
+                        Lead Selling Filters
+                    </div>
+                </div><br/>    
+        </template>
+
+
+        <template if:true={displayTabTemplate.bankstatements}>
+
+            <template if:true={renderOptions}>
+        
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_col-bordered slds-table_striped">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            
+                            <th scope="col">
+                                <div title="Key">Employment Type</div>
+                            </th>
+                            <th scope="col">
+                                <div title="Value">Reject Bank Statements</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={employmentOptions} for:item="mapKey" >
+                            <tr key={mapKey.key}>
+                                <th scope="col">
+                                    <div title={mapKey.key}>{mapKey.key}</div>
+                                </th>
+                                <th scope="col" >
+
+
+                                    <!--div title={mapKey.value}>{mapKey.value}</div-->
+                                    <div class="slds-form-element">
+                                        <label class="slds-checkbox_toggle slds-grid">
+                                        <!--onchange={changeEmploymentState}-->
+                                        <input type="checkbox" name="checkbox-toggle-16"
+                                        aria-describedby="checkbox-toggle-16" checked={mapKey.value} value={mapKey.key} onchange={changeEmploymentState} />
+                                        <span class="slds-checkbox_faux_container" aria-live="assertive">
+                                            <span class="slds-checkbox_faux"></span>
+                                            <span class="slds-checkbox_on">On</span>
+                                            <span class="slds-checkbox_off">Off</span>
+                                        </span>
+                                        </label>
+                                    </div>       
+                                </th>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+
+
+                <H1 class="slds-text-align_center">You can cross check the employment status by opening Metadata record.</H1>
+
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-button variant="brand" name="empStatusval" label="Update" title="Update" 
+                        class="slds-var-m-left_x-small slds-align_absolute-center spacing" value="Update" onclick={getActiveEmpState}
+                        disabled={disableButton.update}>
+                        </lightning-button>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-button variant="brand" label="Open Metadata Record" title="Open Metadata Record" 
+                        class="slds-var-m-left_x-small slds-align_absolute-center spacing" value="openMdt" onclick={OpenMetadataRecord}
+                        disabled={disableButton.redirect}>
+                        </lightning-button>
+                    </div>           
+                </div>
+            
+            </template>
+
+        </template>
+
+        <template if:true={displayTabTemplate.leadfilter}>
+
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_col-bordered slds-table_striped">
+                <thead>
+                    <tr class="slds-text-title_caps">
+                        
+                        <th scope="col">
+                            <div title="Key">Buyers Name</div>
+                        </th>
+                        <th scope="col">
+                            <div title="Value">Filter Enable/Disable</div>
+                        </th>
+                    </tr>
+                </thead>
+
+            <template for:each={filterOptions} for:item="mapKey" >
+                <tr key={mapKey.key}>
+                    <th scope="col">
+                        <div title={mapKey.key}>{mapKey.key}</div>
+                    </th>
+                    <th scope="col" >
+
+
+                        <!--div title={mapKey.value}>{mapKey.value}</div-->
+                        <div class="slds-form-element">
+                            <label class="slds-checkbox_toggle slds-grid">
+                            <!--onchange={changeEmploymentState}-->
+                            <input type="checkbox" name="checkbox-toggle-16"
+                            aria-describedby="checkbox-toggle-16" checked={mapKey.value} value={mapKey.key} onchange={getOverFlowfilterVal} />
+                            <span class="slds-checkbox_faux_container" aria-live="assertive">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-checkbox_on">On</span>
+                                <span class="slds-checkbox_off">Off</span>
+                            </span>
+                            </label>
+                        </div>       
+                    </th>
+                </tr>
+            </template>
+            </table>
+             <!-- OverFlow -->
+             <!-- <div class="slds-form-element slds-box slds-grid overflowbox slds-theme_shade slds-theme_alert-texture">
+                <div class="slds-col">
+                    <div class="slds-grid">
+                        <div class="slds-col">
+                            <lightning-icon icon-name="action:filter" alternative-text="Overflow Filter" title="Filter Status"></lightning-icon>
+                        </div>
+                        <div class="slds-col">
+                            <div class="slds-p-around_medium lgc-bg">
+                                Overflow lead filter
+                                <lightning-helptext content="Employment status selected for Lead Market will be sent to Overflow (Leads whose bank statements are not rejected)"></lightning-helptext>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col toppadding">                                       
+                        <label class="slds-checkbox_toggle slds-grid">    
+                                                   
+                          <input type="checkbox" name="checkbox-toggle-18" value="checkbox-toggle-18" aria-describedby="checkbox-toggle-18" onchange={getOverFlowfilterVal} checked={OverflowFilter}/>
+                          <span id="checkbox-toggle-18" class="slds-checkbox_faux_container slds-align_absolute-center" aria-live="assertive">
+                            <span class="slds-checkbox_faux"></span>
+                            <span class="slds-checkbox_on">On</span>
+                            <span class="slds-checkbox_off">Off</span>
+                          </span>
+                        </label>
+                      </div>            
+                
+              </div><br/> -->
+
+              <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <lightning-button variant="brand" name="Filterval" label="Update" title="Update" 
+                    class="slds-var-m-left_x-small slds-align_absolute-center spacing" value="Update" onclick={getActiveEmpState}
+                    disabled={disableButton.update}>
+                    </lightning-button>
+                </div>
+                <div class="slds-col">
+                    <lightning-button variant="brand" label="Open Metadata Record" title="Open Metadata Record" 
+                    class="slds-var-m-left_x-small slds-align_absolute-center spacing" value="openMdt" onclick={OpenMetadataRecord}
+                    disabled={disableButton.redirect}>
+                    </lightning-button>
+                </div>           
+            </div>
+              <br/>
+            <!-- OverFlow -->
+        </template>
+        
+      
+  
+    </div>
+    </lightning-card>
+</template>
